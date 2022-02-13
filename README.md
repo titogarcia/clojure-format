@@ -1,11 +1,11 @@
 # Rules for formatting Clojure code
 
 ## General rules
-Align similar to semantically similar.
-
 Indent using 2 spaces.
 
-The developer is in control. Feel free to use assisting tools at coding-time, but do not verify nor correct at later stages.
+Align similar to semantically similar.
+
+Feel free to use formatting tools under the supervision of the developer, but do not enforce a format with automatic tools at later stages.
 
 ### Function/macro arguments
 In general, indent arguments using 2 spaces:
@@ -52,6 +52,8 @@ Indent with 1 space, for elements to align:
 
 ### Avoid using tabular formatting
 
+In general, avoid using tabular formatting. In particular, don't do it in binding lists and map literals.
+
 ```clojure
 (let [n 1
       counter 4]
@@ -69,7 +71,7 @@ Indent with 1 space, for elements to align:
 {:n       1
  :counter 4}
   
-; Acceptable (rarely the case)
+; Acceptable (rare cases)
 (def test-data
   ["Mary"        37 :blue]
   ["Bartholomew" 9  :vermilion])
@@ -81,6 +83,33 @@ Make semantics apparent.
 Enforce the minimal set of rules that make developers not step onto each other with edit-time tooling.
 
 Horizontal space is scarce.
+
+## More examples
+
+```clojure
+(http/post "/api/user"
+  {:body post-body
+   :auth user-id}))
+   
+(assoc user :name new-name
+            :age new-age)
+
+(for [user users]
+  (update user :friends
+    #(conj % (assoc friend 
+               :position (count %)
+               :mark? true]
+
+(throw
+  (ex-info "Inconsistent number of foozers" 
+    {:id id
+    :count n}))
+    
+(merge-with into
+  (results)
+  {:users new-users
+   :notes new-notes})
+```
 
 ## Experience
 Expresiveness of Clojure code depends on formatting decisions by the developer. This is different from most other languages, which have more tokens and syntactic rules.
